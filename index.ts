@@ -60,8 +60,11 @@ class Manager {
         '-1': "You lose. Let's try again!",
         '0': 'Draw',
         '1': 'You win!',
-        err: 'Error. Make sure you pass an odd number of unique arguments and that the number ' +
-            'is greater than or equal to three. Example: rock, scissors, paper.'
+        err: 'Error. Make sure you pass:\n' +
+             '- an odd number of unique arguments;\n' +
+             '- amount of arguments is greater than or equal to three;\n' +
+             '- you use English letters or numbers;\n' +
+             'Example: rock, scissors, paper'
     }
 
     private static getAvailableMoves(moves:readonly string[]):void {
@@ -79,7 +82,7 @@ class Manager {
 
     static play(args:readonly string[]):void {
         const moves = args.slice(2);
-        if (args.length >= 3 && (args.length % 2) !== 0 && _.uniq(args).length === args.length) {
+        if (!(/[а-яА-Я]/.test(args.join())) && args.length >= 3 && (args.length % 2) !== 0 && _.uniq(args).length === args.length) {
             const compAnswer = Manager.chooseComputerAnswer(moves.length - 1);
             const key = KeysService.getKey();
             console.log(`HMAC: ${KeysService.getHmac(moves[compAnswer], key)}`);
