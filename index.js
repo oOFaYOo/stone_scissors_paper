@@ -48,7 +48,8 @@ class Table {
     }
 
     static getTable(...args) {
-        console.table(this._getTableData(args))
+        console.log('User ↓   ' + 'PC →   ' + '   The table results are for user answers');
+        console.table(this._getTableData(args));
     }
 
 }
