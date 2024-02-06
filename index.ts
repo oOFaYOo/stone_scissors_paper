@@ -4,7 +4,7 @@ const _ = require('lodash');
 const crypt = require("crypto");
 
 class Moves {
-    static movesComparer(comp:number, user:number, args: readonly string[]):number {
+    static movesComparer(comp: number, user: number, args: readonly string[]): number {
         const middle = Math.trunc(args.length / 2);
         const distance = comp - user;
 
@@ -19,11 +19,11 @@ class Moves {
 }
 
 class KeysService {
-    static getKey():string {
+    static getKey(): string {
         return crypt.randomBytes(32).toString('hex');
     }
 
-    static getHmac(move:string, key:string):string {
+    static getHmac(move: string, key: string): string {
         return crypt.createHmac('sha256', key).update(move).digest("hex");
     }
 
@@ -36,7 +36,7 @@ class Table {
         '1': 'Win'
     }
 
-    private static getTableData(args:readonly string []):{[key:string]:{[key:string]:string}} {
+    private static getTableData(args: readonly string []): { [key: string]: { [key: string]: string } } {
         const comparedMoves = {};
 
         for (let i = 0; i < args.length; i++) {
@@ -48,7 +48,7 @@ class Table {
         return comparedMoves;
     }
 
-    static getTable(args:readonly string[]):void {
+    static getTable(args: readonly string[]): void {
         console.log('PC ↓   ' + 'User →   ' + '   The table results are for user answers');
         console.table(this.getTableData(args));
     }
@@ -61,13 +61,13 @@ class Manager {
         '0': 'Draw',
         '1': 'You win!',
         err: 'Error. Make sure you pass:\n' +
-             '- an odd number of unique arguments;\n' +
-             '- amount of arguments is greater than or equal to three;\n' +
-             '- you use English letters or numbers;\n' +
-             'Example: rock, scissors, paper'
+            '- an odd number of unique arguments;\n' +
+            '- amount of arguments is greater than or equal to three;\n' +
+            '- you use English letters or numbers;\n' +
+            'Example: rock, scissors, paper'
     }
 
-    private static getAvailableMoves(moves:readonly string[]):void {
+    private static getAvailableMoves(moves: readonly string[]): void {
         moves.forEach((v, i) => {
             console.log(`${i + 1} - ${v}`)
         })
@@ -75,12 +75,12 @@ class Manager {
         console.log('? - help')
     }
 
-    private static chooseComputerAnswer(max:number):number {
+    private static chooseComputerAnswer(max: number): number {
         const rand = Math.random() * (max + 1);
         return Math.floor(rand)
     }
 
-    static play(args:readonly string[]):void {
+    static play(args: readonly string[]): void {
         const moves = args.slice(2);
         if (!(/[а-яА-Я]/.test(args.join())) && args.length >= 3 && (args.length % 2) !== 0 && _.uniq(args).length === args.length) {
             const compAnswer = Manager.chooseComputerAnswer(moves.length - 1);
