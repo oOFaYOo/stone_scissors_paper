@@ -1,5 +1,5 @@
 const crypt = require("crypto");
-import {IKeysService} from "../types";
+import {IKeysService} from "./types";
 
 class KeysService implements IKeysService {
     getKey() {

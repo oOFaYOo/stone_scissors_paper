@@ -2,7 +2,7 @@ const readline = require('node:readline');
 const rl = readline.createInterface({input: process.stdin, output: process.stdout});
 const _ = require('lodash');
 
-import {IManager, Result} from "../types";
+import {IManager, Result} from "./types";
 import KeysService from "./KeysService";
 import Table from "./Table";
 import Moves from "./Moves";

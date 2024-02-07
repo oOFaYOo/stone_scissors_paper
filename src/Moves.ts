@@ -1,4 +1,4 @@
-import {IMoves, Result} from "../types";
+import {IMoves, Result} from "./types";
 
 class Moves implements IMoves {
      movesComparer(comp, user, args) {

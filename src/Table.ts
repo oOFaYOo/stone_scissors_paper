@@ -1,5 +1,5 @@
 import Moves from "./Moves";
-import {ITable} from "../types";
+import {ITable} from "./types";
 
 class Table implements ITable {
     private getTableData(args: readonly string []): { [key: string]: { [key: string]: string } } {
